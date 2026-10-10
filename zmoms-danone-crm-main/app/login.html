@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <title>Đăng nhập | ZMOMS × DANONE CRM</title>
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+
+  <body>
+    <div class="login-page">
+      <section class="login-brand">
+        <div class="brand-mark">Z<span>M</span></div>
+        <p class="eyebrow">CUSTOMER RELATIONSHIP MANAGEMENT</p>
+        <h1>ZMOMS <span>×</span><br />DANONE CRM</h1>
+        <p class="brand-description">
+          Nền tảng quản lý khách hàng, đơn hàng và hoạt động kinh doanh trong hệ
+          sinh thái ZMOMS × DANONE.
+        </p>
+        <div class="brand-footer">CONNECT · MANAGE · GROW</div>
+      </section>
+
+      <main class="login-panel">
+        <section class="login-card">
+          <div class="mobile-brand">ZMOMS <span>×</span> DANONE CRM</div>
+
+          <p class="eyebrow">SECURE ACCESS</p>
+          <h2>Đăng nhập</h2>
+          <p class="form-description">
+            Nhập thông tin tài khoản để truy cập hệ thống.
+          </p>
+
+          <form id="loginForm">
+            <label for="demoAccount">Tài khoản</label>
+            <input
+              id="demoAccount"
+              name="account"
+              type="text"
+              placeholder="Nhập tài khoản"
+              autocomplete="username"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+            />
+
+            <label for="demoPassword">Mật khẩu</label>
+            <div class="password-wrap">
+              <input
+                id="demoPassword"
+                name="password"
+                type="password"
+                placeholder="Nhập mật khẩu"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                id="togglePassword"
+                class="toggle-password"
+                aria-label="Hiện mật khẩu"
+              >
+                Hiện
+              </button>
+            </div>
+
+            <p
+              id="loginError"
+              class="login-error"
+              role="alert"
+              aria-live="polite"
+              hidden
+            ></p>
+
+            <button type="submit" class="login-button">
+              <span>Đăng nhập hệ thống</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </form>
+
+          <p class="copyright">© 2026 ZMOMS × DANONE CRM</p>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/auth.js"></script>
+  </body>
+</html>
