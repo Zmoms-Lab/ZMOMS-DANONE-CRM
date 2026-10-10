@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danone Aptamil × Zmoms — Omni-Channel CRM System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <div class="brand-logo-badge">Z×D</div>
+        <div class="brand-info">
+          <h1>DANONE × ZMOMS</h1>
+          <span>New User Acquisition CRM</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-category">TỔNG QUAN HỆ THỐNG</div>
+        <a class="nav-item active" data-tab="dashboard">
+          <span class="icon">📊</span>
+          <span>Dashboard 16 Tuần</span>
+        </a>
+        <a class="nav-item" data-tab="customers">
+          <span class="icon">🤰</span>
+          <span>Khách Hàng & Raw Data</span>
+          <span class="nav-badge" id="customerCountBadge" style="background: #0077CC;">423</span>
+        </a>
+        <a class="nav-item" data-tab="orders">
+          <span class="icon">📦</span>
+          <span>Quản Lý Đơn Hàng Master</span>
+          <span class="nav-badge" id="orderCountBadge" style="background: #FF5A5F;">366</span>
+        </a>
+        <a class="nav-item" data-tab="shops">
+          <span class="icon">🏬</span>
+          <span>Danh Sách Shop MBI & Tổng Đơn</span>
+          <span class="nav-badge" id="shopCountBadge" style="background: #8B5CF6;">9 Shop</span>
+        </a>
+
+        <div class="nav-category">4 KÊNH TIẾP CẬN (ACQUISITION)</div>
+        <a class="nav-item" data-tab="hospitals">
+          <span class="icon">🏥</span>
+          <span>Hội Thảo Bệnh Viện</span>
+        </a>
+        <a class="nav-item" data-tab="webinars">
+          <span class="icon">💻</span>
+          <span>Lớp Online & Webinar</span>
+        </a>
+        <a class="nav-item" data-tab="spas">
+          <span class="icon">💆‍♀️</span>
+          <span>Chuỗi Spa Mẹ Bầu</span>
+        </a>
+        <a class="nav-item" data-tab="midwives">
+          <span class="icon">👩‍⚕️</span>
+          <span>Nữ Hộ Sinh Tại Nhà</span>
+        </a>
+
+        <div class="nav-category">HIỆU SUẤT & ĐỐI TÁC</div>
+        <a class="nav-item" data-tab="kpi">
+          <span class="icon">🎯</span>
+          <span>Tiến Độ KPI & Thưởng Sales</span>
+        </a>
+        <a class="nav-item" data-tab="danone-portal">
+          <span class="icon">🤝</span>
+          <span>Cổng Đối Tác Danone</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" id="currentRoleAvatar">AD</div>
+          <div class="user-details">
+            <h4 id="currentRoleName">Quản Lý Zmoms (Admin)</h4>
+            <span id="currentRoleDesc">Toàn quyền điều hành dự án</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-wrapper">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="campaign-tag">
+            <span>🛡️</span>
+            <span id="topbarCampaignTitle">Chiến Dịch: Đề kháng vững vàng, trí tuệ tinh anh (01/09/2026 - 15/12/2026)</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Role Switcher -->
+          <div class="role-switcher-container">
+            <button class="role-btn active" data-role="admin">👑 Admin Zmoms</button>
+            <button class="role-btn" data-role="sales">💼 Sales & CSKH</button>
+            <button class="role-btn" data-role="midwife">👩‍⚕️ Nữ Hộ Sinh</button>
+            <button class="role-btn" data-role="shop">🏬 Shop MBI</button>
+            <button class="role-btn" data-role="danone">🤝 Đối Tác Danone</button>
+          </div>
+
+          <button class="btn-secondary" id="btnOpenTargetSettings" title="Thay đổi chỉ tiêu & thông số Dashboard">
+            <span>⚙️</span> Cấu Hình Chỉ Tiêu
+          </button>
+          <button class="btn-secondary" id="btnOpenLiveKpiModal" style="color: #0077CC; border-color: #93C5FD;" title="Cập nhật thực đạt KPI giống Render">
+            <span>📝</span> Cập Nhật KPI
+          </button>
+          <button class="btn-secondary" id="btnExportCSV">
+            <span>📥</span> Xuất Excel
+          </button>
+          <button class="btn-primary" id="btnOpenNewOrder">
+            <span>➕</span> Lên Đơn Mới
+          </button>
+        </div>
+      </header>
+
+      <!-- ZERO DIRECT CONTACT REMINDER -->
+      <div style="padding: 16px 32px 0;">
+        <div class="zero-contact-banner">
+          <div class="zero-contact-text">
+            <h4>⚠️ NGUYÊN TẮC 'ZERO DIRECT CONTACT' (DANONE × ZMOMS)</h4>
+            <p>CSKH Zmoms không liên hệ trực tiếp đôn đốc Shop MBI. Mọi việc kiểm tra, hối thúc thương mại do Danone trực tiếp xử lý.</p>
+          </div>
+          <span class="status-pill status-waiting" id="slaAlertPill">⚡ SLA: Hệ thống cảnh báo tự động</span>
+        </div>
+      </div>
+
+      <!-- MAIN PAGE CONTENT -->
+      <main class="page-content" id="mainContent">
+        <!-- Rendered dynamically by JavaScript -->
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL: CẤU HÌNH THÔNG SỐ & MỤC TIÊU DASHBOARD (NEW!) -->
+  <div class="modal-overlay" id="targetSettingsModal">
+    <div class="modal-dialog" style="max-width: 720px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 17px; color: #1E293B;">⚙️ Hiệu Chỉnh Thông Số & Mục Tiêu Dashboard</h3>
+          <p style="font-size: 12px; color: #64748B; margin: 2px 0 0;">Tự do tùy chỉnh mục tiêu chiến dịch, chỉ số thực đạt và hạn mức Quota của 9 Shop MBI</p>
+        </div>
+        <button class="modal-close" id="btnCloseTargetModal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top: 10px;">
+        <!-- Nav Subtabs inside Modal -->
+        <div class="view-subtabs-container" style="margin-bottom: 18px; border-bottom: 2px solid #E2E8F0;">
+          <button type="button" class="view-subtab-btn active setting-tab-btn" data-target="settingTabGoals">
+            <span>🎯</span> 1. Mục Tiêu Chiến Dịch
+          </button>
+          <button type="button" class="view-subtab-btn setting-tab-btn" data-target="settingTabActuals">
+            <span>📊</span> 2. Số Liệu Thực Tế
+          </button>
+          <button type="button" class="view-subtab-btn setting-tab-btn" data-target="settingTabShops">
+            <span>🏬</span> 3. Quota 9 Shop MBI
+          </button>
+        </div>
+
+        <form id="targetSettingsForm">
+          <!-- TAB 1: MỤC TIÊU CHIẾN DỊCH -->
+          <div id="settingTabGoals" class="setting-tab-content">
+            <div class="form-group">
+              <label class="form-label">Tên Chiến Dịch / Dự Án *</label>
+              <input type="text" class="form-control" id="settingProjectName" placeholder="Đề kháng vững vàng, trí tuệ tinh anh" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Thời Gian Triển Khai Chiến Dịch *</label>
+              <input type="text" class="form-control" id="settingDuration" placeholder="16 Tuần (01/09/2026 - 15/12/2026)" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">🎯 Mục Tiêu Raw Data Xác Thực (Target Data) *</label>
+                <input type="number" class="form-control" id="settingTargetData" required min="100" placeholder="10010">
+                <small style="color: #64748B; font-size: 11.5px;">Mặc định: 10,010 mẹ đăng ký</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label">🛒 Mục Tiêu New Users Mua Hàng (Target NU) *</label>
+                <input type="number" class="form-control" id="settingTargetNu" required min="10" placeholder="2517">
+                <small style="color: #64748B; font-size: 11.5px;">Mặc định: 2,517 mẹ mua gói Aptamil</small>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">⚡ Tỷ Lệ Chuyển Đổi Mục Tiêu Chuẩn (Target CR %) *</label>
+                <input type="number" step="0.01" class="form-control" id="settingTargetCr" required placeholder="25.14">
+                <small style="color: #64748B; font-size: 11.5px;">Mặc định chuẩn Danone: 25.14%</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label">🏥 Chỉ Tiêu Bệnh Viện Hợp Tác</label>
+                <input type="number" class="form-control" id="settingTotalHospitals" placeholder="26">
+                <small style="color: #64748B; font-size: 11.5px;">Mục tiêu kết nối 26 bệnh viện</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: SỐ LIỆU THỰC TẾ & ĐIỀU CHỈNH -->
+          <div id="settingTabActuals" class="setting-tab-content" style="display: none;">
+            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 12.5px; color: #1E40AF;">
+              💡 <strong>Chế Độ Tính Toán:</strong> Bạn có thể để hệ thống tự động đếm trực tiếp từ Database (423 raw leads, 367 đơn hàng) hoặc nhập số ghi đè để mô phỏng kịch bản.
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chế Độ Hiển Thị Số Thực Đạt:</label>
+              <div style="display: flex; gap: 20px;">
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer;">
+                  <input type="radio" name="settingCalcMode" value="auto" checked id="calcModeAuto"> 
+                  <span><strong>Tự động đếm theo Database</strong> (Khuyên dùng)</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer;">
+                  <input type="radio" name="settingCalcMode" value="manual" id="calcModeManual"> 
+                  <span><strong>Tự nhập số ghi đè (Override)</strong></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Tổng Raw Data Đăng Ký:</label>
+                <input type="number" class="form-control" id="settingTotalRawData" placeholder="423">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Số Data Hợp Lệ Tính KPI:</label>
+                <input type="number" class="form-control" id="settingValidRawData" placeholder="409">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Số Mẹ Đã Đặt Đơn Từ Raw Data:</label>
+                <input type="number" class="form-control" id="settingConvertedRawData" placeholder="185">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Số Bệnh Viện Đã Phê Duyệt:</label>
+                <input type="number" class="form-control" id="settingApprovedHospitals" placeholder="11">
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: PHÂN BỔ QUOTA 9 SHOP MBI -->
+          <div id="settingTabShops" class="setting-tab-content" style="display: none;">
+            <p style="font-size: 12.5px; color: #64748B; margin-bottom: 12px;">
+              Hiệu chỉnh hạn mức Quota giao hàng cam kết cho 9 Shop MBI đối tác theo từng khu vực:
+            </p>
+            <div class="table-responsive" style="max-height: 280px;">
+              <table class="crm-table">
+                <thead>
+                  <tr>
+                    <th>Tên Shop MBI</th>
+                    <th>Khu Vực</th>
+                    <th>Đơn Đã Nhận</th>
+                    <th style="width: 140px;">Chỉ Tiêu Quota</th>
+                  </tr>
+                </thead>
+                <tbody id="settingShopQuotasList">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 18px 0 0; background: transparent; border-top: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+            <button type="button" class="btn-secondary" id="btnResetDefaultTargets" style="color: #DC2626; border-color: #FECACA;">
+              ↺ Khôi Phục Mặc Định Gốc
+            </button>
+            <div style="display: flex; gap: 10px;">
+              <button type="button" class="btn-secondary" id="btnCancelTargetModal">Hủy</button>
+              <button type="submit" class="btn-primary">💾 Lưu Toàn Bộ Thông Số</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CẬP NHẬT THỰC ĐẠT KPI CHO SALES (GIỐNG RENDER NHƯNG ĐỒNG BỘ CRM!) -->
+  <div class="modal-overlay" id="liveKpiModal">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3>📝 Cập Nhật Thực Đạt KPI (Live Entry)</h3>
+        <button class="modal-close" id="btnCloseLiveKpiModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Giao diện cập nhật tiến độ thực đạt hàng ngày của Sales & CSKH (thay thế dashboard Render cũ). Dữ liệu được lưu trữ trực tiếp vào hệ thống chung.
+        </p>
+        <form id="liveKpiForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Chọn Ngày Cập Nhật:</label>
+              <input type="date" class="form-control" id="kpiEntryDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chọn Nhân Sự (PIC):</label>
+              <select class="form-control" id="kpiEntryPicSelect" required>
+                <!-- Populated by JS -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Thực Đạt NU Bán (Combo):</label>
+              <input type="number" class="form-control" id="kpiEntryNuBan" min="0" placeholder="0" required style="font-size: 16px; font-weight: 700;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Thực Đạt NU Trợ Giá:</label>
+              <input type="number" class="form-control" id="kpiEntryNuTroGia" min="0" placeholder="0" required style="font-size: 16px; font-weight: 700;">
+            </div>
+          </div>
+
+          <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 12.5px; color: #1E40AF;">
+            💡 <strong>Tự Động Tính:</strong> Bạn có thể gõ trực tiếp hoặc bấm nút dưới đây để CRM tự động tổng hợp số lượng đơn hàng thực tế gán cho nhân viên này.
+          </div>
+
+          <div class="modal-footer" style="padding: 10px 0 0; background: transparent; border-top: none;">
+            <button type="button" class="btn-secondary" id="btnCancelLiveKpiModal">Hủy</button>
+            <button type="submit" class="btn-primary">💾 Lưu Tiến Độ & Tính Thưởng</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TẠO ĐƠN HÀNG MỚI (CHỐNG TRÙNG & TỰ ĐỘNG PHÂN BỔ) -->
+  <div class="modal-overlay" id="newOrderModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>⚡ Lên Đơn Hàng Mới & Tự Động Định Tuyến Shop MBI</h3>
+        <button class="modal-close" id="btnCloseOrderModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="newOrderForm">
+          <!-- Live Duplicate Check -->
+          <div class="form-group">
+            <label class="form-label">Số Điện Thoại Mẹ Bầu * (Tự động chống trùng tức thì)</label>
+            <input type="tel" class="form-control" id="orderPhone" placeholder="Ví dụ: 0988318495" required autocomplete="off">
+            <div class="duplicate-alert" id="duplicateAlertBox"></div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Họ và Tên Mẹ *</label>
+              <input type="text" class="form-control" id="orderCustomerName" placeholder="Nguyễn Thị Lan" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phễu Khách Hàng</label>
+              <select class="form-control" id="orderFunnel">
+                <option value="Thành viên Zmoms">Thành viên Zmoms</option>
+                <option value="Hội thảo Bệnh viện">Hội thảo Bệnh viện</option>
+                <option value="Online Webinar">Online Webinar</option>
+                <option value="Nữ hộ sinh tư vấn tại nhà">Nữ hộ sinh tư vấn tại nhà</option>
+                <option value="Khách Spa đối tác">Khách Spa đối tác</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Địa Chỉ Nhận Hàng Chi Tiết *</label>
+            <input type="text" class="form-control" id="orderAddress" placeholder="Ví dụ: 12A đường Lê Lợi, P. Ninh Kiều, Cần Thơ" required autocomplete="off">
+            <small style="color: #64748B; font-size: 11.5px; margin-top: 4px; display: block;">💡 Gợi ý: Hệ thống tự động nhận diện khu vực & định tuyến shop ngay khi bạn nhập địa chỉ!</small>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Khu Vực Định Tuyến Shop MBI *</label>
+              <select class="form-control" id="orderRegion" required>
+                <option value="">-- Chọn Khu Vực --</option>
+                <option value="can_tho">🌾 Cần Thơ (Thế Giới Sơ Sinh / Nous Baby / Nhà Của Gạo)</option>
+                <option value="ho_chi_minh">🏙️ Hồ Chí Minh (Voi Con)</option>
+                <option value="ha_noi">🏛️ Hà Nội (Mẹ Ơi / Sữa 3 Tốt)</option>
+                <option value="hai_phong">⚓ Hải Phòng (Ababy / Cute Baby)</option>
+                <option value="other">🌐 Khu vực khác (Long Châu Toàn Quốc)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Quận / Huyện / Chi Tiết</label>
+              <input type="text" class="form-control" id="orderDistrict" placeholder="Ví dụ: Ninh Kiều, Cầu Giấy, Quận 1...">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Gói Sản Phẩm Combo Danone</label>
+            <select class="form-control" id="orderProduct">
+              <option value="Sữa Aptamil 380g" data-amount="320000">Sữa Aptamil 380g (320,000đ)</option>
+              <option value="Combo Tân Sinh (2 lon 800g + Gối chống trào)" data-amount="1280000">Combo Tân Sinh (2 lon 800g + Gối chống trào) (1,280,000đ)</option>
+              <option value="Combo Đề Kháng Vàng (3 lon 800g + Bình giữ nhiệt)" data-amount="1920000">Combo Đề Kháng Vàng (3 lon 800g + Bình giữ nhiệt) (1,920,000đ)</option>
+              <option value="Combo Khám Phá Toàn Diện (4 lon + Xe chòi chân)" data-amount="2560000">Combo Khám Phá Toàn Diện (4 lon + Xe chòi chân) (2,560,000đ)</option>
+            </select>
+          </div>
+
+          <!-- SMART AUTO-DISPATCH CARD -->
+          <div class="content-card" style="margin-top: 12px; background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: 12px; overflow: hidden;">
+            <div class="card-header" style="padding: 12px 16px; background: #EFF6FF; border-bottom: 1px solid #DBEAFE; display: flex; justify-content: space-between; align-items: center;">
+              <div class="card-title" style="font-size: 13.5px; font-weight: 700; color: #1E3A8A; display: flex; align-items: center; gap: 8px;">
+                <span>🤖</span> Định Tuyến Tự Động Shop MBI (Auto-Routing Engine)
+              </div>
+              <span id="routingRegionBadge" class="status-pill status-delivered" style="background: #2563EB; color: #fff; font-size: 11px;">Chờ chọn khu vực</span>
+            </div>
+            <div class="card-body" style="padding: 14px 16px;">
+              <div id="routingRuleNote" style="font-size: 12.5px; color: #475569; margin-bottom: 10px; line-height: 1.5;">
+                Căn cứ vào địa bàn của Mẹ, hệ thống tự động gán shop MBI tương ứng theo quy định phân bổ.
+              </div>
+
+              <!-- Shop Candidate Selector (Hiển thị khi khu vực có nhiều hơn 1 shop) -->
+              <div id="shopCandidatesBox" style="margin-bottom: 12px; display: none;">
+                <label style="font-size: 11.5px; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 6px; display: block;">
+                  Chọn Shop Nhận Đơn Tại Khu Vực Này:
+                </label>
+                <div id="shopCandidatesList" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <!-- Dynamic Shop Pills -->
+                </div>
+              </div>
+
+              <!-- Chosen Shop Display Card -->
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #FFFFFF; border: 1.5px solid #BFDBFE; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; font-weight: 700;">Shop MBI Phụ Trách Đơn Hàng:</div>
+                  <strong id="autoShopName" style="color: #0284C7; font-size: 16px; display: block; margin-top: 2px;">Chưa chọn</strong>
+                  <div style="font-size: 12px; color: #475569; margin-top: 2px;" id="autoShopNote">Vui lòng chọn khu vực hoặc nhập địa chỉ</div>
+                  <div style="font-size: 11.5px; color: #64748B; margin-top: 4px;" id="autoShopBankInfo"></div>
+                </div>
+                <div id="shopBadgeWrapper">
+                  <span class="status-pill status-delivered" id="autoShopStatusPill" style="font-size: 11.5px;">Tự động</span>
+                </div>
+              </div>
+
+              <!-- VietQR Quick Payment -->
+              <div class="vietqr-card" id="vietqrBox" style="margin-top: 14px; text-align: center; background: #FFF; padding: 12px; border-radius: 8px; border: 1px dashed #CBD5E1;">
+                <div style="font-size: 12px; font-weight: 700; color: #1E293B; margin-bottom: 8px;">📲 MÃ VIETQR CHUYỂN KHOẢN TIỀN SỮA CHO SHOP:</div>
+                <img id="vietqrImg" src="https://img.vietqr.io/image/vietcombank-1057169817-compact2.jpg?amount=320000&addInfo=Z000%20Tien%20sua%20Danone&accountName=HoKinhDoanhLaDucThanh" class="vietqr-image" alt="VietQR" style="max-width: 200px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: inline-block;">
+                <div style="font-size: 11.5px; color: #64748B; margin-top: 6px;" id="vietqrMemoText">Quét mã thanh toán trực tiếp tới Shop MBI để đơn kích hoạt giao ngay.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 14px 0 0; background: transparent; border-top: none;">
+            <button type="button" class="btn-secondary" id="btnCancelOrderModal">Hủy</button>
+            <button type="submit" class="btn-primary" id="btnSubmitOrder">✅ Tạo & Bắn Đơn Cho Shop</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG (SHOP MBI HOẶC ADMIN) -->
+  <div class="modal-overlay" id="updateOrderModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="updateModalTitle">Cập Nhật Tiến Độ Vận Hành Đơn Hàng</h3>
+        <button class="modal-close" id="btnCloseUpdateModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="updateOrderForm">
+          <input type="hidden" id="updateOrderId">
+          
+          <div class="form-group">
+            <label class="form-label">Trạng Thái Xử Lý Của Shop MBI</label>
+            <select class="form-control" id="updateShopStatus">
+              <option value="[1] Chờ tiếp nhận">[1] Chờ tiếp nhận</option>
+              <option value="[2] Shop đã nhận">[2] Shop đã nhận (Đóng gói)</option>
+              <option value="[3] Đang giao">[3] Đang giao (Đã giao ĐVVC)</option>
+              <option value="[4] Đã giao hàng">[4] Đã giao hàng thành công</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Đơn Vị Vận Chuyển</label>
+              <select class="form-control" id="updateCarrier">
+                <option value="Ahamove">Ahamove (Giao hỏa tốc)</option>
+                <option value="Grab Express">Grab Express</option>
+                <option value="Giao hàng nhanh">Giao hàng nhanh (GHN)</option>
+                <option value="J&T">J&T Express</option>
+                <option value="Viettel Post">Viettel Post</option>
+                <option value="Shipper riêng">Shipper riêng của Shop</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mã Vận Đơn / SĐT Tài Xế</label>
+              <input type="text" class="form-control" id="updateTrackingCode" placeholder="Ví dụ: 801113029239">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Link Ảnh Giao Hàng Thành Công (POD)</label>
+            <input type="url" class="form-control" id="updatePodLink" placeholder="https://drive.google.com/drive/folders/...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Ghi Chú Vận Hành</label>
+            <textarea class="form-control" id="updateNotes" rows="2" placeholder="Ghi chú giao hàng, mẹ dặn giao giờ hành chính..."></textarea>
+          </div>
+
+          <div class="modal-footer" style="padding: 14px 0 0; background: transparent; border-top: none;">
+            <button type="button" class="btn-secondary" id="btnCancelUpdateModal">Đóng</button>
+            <button type="submit" class="btn-primary">Lưu Cập Nhật</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="data/initial_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

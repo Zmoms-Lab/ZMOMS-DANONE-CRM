@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: zmoms-danone-crm
+    env: python
+    region: singapore
+    plan: free
+    rootDir: app
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
